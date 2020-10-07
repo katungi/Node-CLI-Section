@@ -1,6 +1,6 @@
 # Creating CommandLine Interfaces using Node.js
 
-The commandline or the terminal is a powerful tool used by alot of developers. It allows us to interact with the operating system using commands passed as inputs. A lot of tools used by developers have a terminal CLI or commandline interface to acompany the product. Using the commandline is easy and direct hence why alot of people prefer using it.
+The commandline or the terminal is a powerful tool used by a lot of developers. It allows us to interact with the operating system using commands passed as input strings of text. A lot of tools used by developers have a terminal CLI or commandline interface to acompany the product. Using the commandline is easy and direct hence why a lot of people prefer using it.
 
 Creating a CLI application is not a difficult task and this advantage has helped make them more popular.
 
@@ -33,7 +33,7 @@ It should always be specified as the first line of the entry file.
 
 To get started, lets setup our project and Node.js environment. In the terminal, enter:
 
-```terninal
+```terminal
 mkdir node-cli
 cd node-cli
 npm init -y
@@ -80,7 +80,7 @@ Your package.json file should now looks like this:
 
 ### Getting the jokes and quotes
 
-Lets setup the jokes and quotes. We will be using a [quote-generator-api](https://quotes.rest/) and [jokes-generator-api](https://official-joke-api.appspot.com/). We will fetch the individual jokes display them on the terminal when the user asks for them.
+Lets setup the jokes and quotes. We will be using a [quote-generator-api](https://quotes.rest/) and [jokes-generator-api](https://official-joke-api.appspot.com/). We will fetch the individual jokes and display them on the terminal when the user asks for them.
 
 We will create two functions that will do the fetching using axios.
 
@@ -92,7 +92,7 @@ const chalk = require("chalk");
 
 let url = "";
 
-function getJokes() {
+function getJoke() {
   url = "https://official-joke-api.appspot.com/random_joke";
   axios({
     method: "get",
@@ -143,7 +143,7 @@ Node.js comes with an inbuilt app interface for the process module called **proc
 
 However using _process.arg_ might be tedious and not beginner friendly. Subsequently we will use [yargs](https://www.npmjs.com/package/yargs) to help us process the options.
 
-Yargs offers alot of options that make it very powerful and widely used. Some of them include `.command()`, `.help()`, `.example()`, `.usage()` and others. To read more on the different capabilities of the options in the yargs [docs](https://github.com/yargs/yargs).
+Yargs offers a lot of options that make it very powerful and widely used. Some of them include `.command()`, `.help()`, `.example()`, `.usage()` and others. To read more on the different capabilities of the options in the yargs [docs](https://github.com/yargs/yargs).
 
 We will be making use of the command option to allow us to invoke a function when the set command is triggered. The syntax for this is:
 
@@ -178,7 +178,7 @@ argv.command(
 ).argv;
 ```
 
-Finally, let's pass in out functions to enable the jokes and quotes to be displayed.
+Finally, let's pass in our functions to enable the jokes and quotes to be displayed.
 
 ```javascript
 const argv = require("yargs");
@@ -187,7 +187,7 @@ argv.command(
   "Fetching your joke",
   (yargs) => {},
   (argv) => {
-    getJokes();
+    getJoke();
   }
 ).argv;
 
@@ -230,7 +230,7 @@ argv.command(
   "Fetching your joke",
   (yargs) => {},
   (argv) => {
-    getJokes();
+    getJoke();
   }
 ).argv;
 
@@ -243,7 +243,7 @@ argv.command(
   }
 ).argv;
 
-function getJokes() {
+function getJoke() {
   url = "https://official-joke-api.appspot.com/random_joke";
   axios({
     method: "get",
