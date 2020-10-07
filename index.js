@@ -48,11 +48,9 @@ function getQuote() {
     headers: { Accept: "application/json" },
   })
     .then((res) => {
-      const quote = res.data.contents.quotes[0].quote;
-      const author = res.data.contents.quotes[0].author;
-      const log = chalk.cyan(`${quote} - ${author}`);
-      isFetching = false;
-      console.log(log);
+      const quote = chalk.cyan(res.data.contents.quotes[0].quote);
+      const author = chalk.green(res.data.contents.quotes[0].author);
+      console.log(`${quote} - ${author}`);
     })
     .catch((err) => {
       const log = chalk.red(err);

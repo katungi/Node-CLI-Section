@@ -268,11 +268,9 @@ function getQuote() {
     headers: { Accept: "application/json" },
   })
     .then((res) => {
-      const quote = res.data.contents.quotes[0].quote;
-      const author = res.data.contents.quotes[0].author;
-      const log = chalk.cyan(`${quote} - ${author}`);
-      isFetching = false;
-      console.log(log);
+     const quote = chalk.cyan(res.data.contents.quotes[0].quote);
+      const author = chalk.green(res.data.contents.quotes[0].author);
+      console.log(`${quote} - ${author}`);
     })
     .catch((err) => {
       const log = chalk.red(err);
@@ -287,4 +285,7 @@ we added the help command to provide a default ```--help/help``` flag to give ap
 
 ### Conclussion
 
-In this article we went through how to start a CLI script using Node.js 
+In this article we went through how to setup a CLI script using Node.js, we also went through what the shebang is and why it is important in CLI applicaitons, and finally learned how to pass arguments and commands to the application. As a bonus, we used chalk to make out outputs looks nice and presentable.
+
+The code for the article can be found [here](https://github.com/katungi/Node-CLI-Section)
+
