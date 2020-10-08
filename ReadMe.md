@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/katungi/Node-CLI-Section)](https://repl.it/github/katungi/Node-CLI-Section)
+
 # Creating CommandLine Interfaces using Node.js
 
 The commandline or the terminal is a powerful tool used by a lot of developers. It allows us to interact with the operating system using commands passed as input strings of text. A lot of tools used by developers have a terminal CLI or commandline interface to acompany the product. Using the commandline is easy and direct hence why a lot of people prefer using it.
