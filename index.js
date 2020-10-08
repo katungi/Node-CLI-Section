@@ -3,7 +3,11 @@
 const axios = require("axios");
 const chalk = require("chalk");
 const argv = require("yargs");
+const textToSpeech = require('@google-cloud/text-to-speech');
+const fs = require('fs');
+const util = require('util');
 
+const client = new textToSpeech.TextToSpeechClient();
 let url = "";
 argv.command(
   "joke",
@@ -32,7 +36,9 @@ function getJokes() {
     .then((res) => {
       const setup = chalk.cyan(res.data.setup);
       const punchline = chalk.green(res.data.punchline);
-      console.log(`${setup} - ${punchline}`);
+      const log = `${setup} - ${punchline}`
+      console.log(log);
+      quickStart(log);
     })
     .catch((err) => {
       const log = chalk.red(err);
@@ -50,7 +56,10 @@ function getQuote() {
     .then((res) => {
       const quote = chalk.cyan(res.data.contents.quotes[0].quote);
       const author = chalk.green(res.data.contents.quotes[0].author);
-      console.log(`${quote} - ${author}`);
+      const log = `${quote} - ${author}`;
+      console.log(log);
+      quickStart(log);
+
     })
     .catch((err) => {
       const log = chalk.red(err);
@@ -58,3 +67,16 @@ function getQuote() {
     });
 }
 argv.help();
+
+async function quickStart(text) {
+  const request = {
+    input: {text: text},
+    voice: {languageCode: 'en-US', ssmlGender: 'NEUTRAL'},
+    audioConfig: {audioEncoding: 'MP3'},
+  };
+  const [response] = await client.synthesizeSpeech(request);
+  const writeFile = util.promisify(fs.writeFile);
+  await writeFile('output.mp3', response.audioContent, 'binary');
+  console.log('Audio content written to file: output.mp3');
+}
+ 
